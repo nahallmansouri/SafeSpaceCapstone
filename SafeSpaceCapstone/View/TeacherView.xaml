@@ -1,0 +1,72 @@
+﻿<Window x:Class="SafeSpaceCapstone.View.TeacherView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SafeSpaceCapstone.View"
+        mc:Ignorable="d"
+        Title="TeacherView" Height="450" Width="800">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Import"
+                          Background="Transparent">
+                    <MenuItem Name="StudentNamesMenuItem" Header="Student Names" Click="StudentNamesMenuItem_Click" />
+                    <MenuItem Name ="StudentDataMenuItem" Header="Student Data" Click="StudentDataMenuItem_Click"/>
+                </MenuItem>
+                <MenuItem Name="ExportMenuItem" Header="Export"/>
+            </Menu>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical">
+                    <Expander x:Name="StudentNamesTable" Header="Student Names and Serial #'s">
+                        <ListView x:Name="StudentNamesListView"
+                                  Background="Transparent"
+                                  TextElement.FontSize="10">
+                            <ListView.Style>
+                                <Style TargetType="ListView"/>
+                            </ListView.Style>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="Auto" Header="Student Name"/>
+                                    <GridViewColumn Width="Auto" Header="Serial Number"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Expander>
+                    <Expander x:Name="StudentDataTable" Header="Student Names and Encounters">
+                        <ListView x:Name="StudentDataListView"
+                                  Background="Transparent"
+                                  TextElement.FontSize="10">
+                            <ListView.Style>
+                                <Style TargetType="ListView"/>
+                            </ListView.Style>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="Auto" Header="Serial Number"/>
+                                    <GridViewColumn Width="Auto" Header="Number of Encounters"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Expander>
+                    <Expander x:Name="MasterTable" Header="Master Table">
+                        <ListView x:Name="MasterListView"
+                                  Background="Transparent"
+                                  TextElement.FontSize="10">
+                            <ListView.Style>
+                                <Style TargetType="ListView"/>
+                            </ListView.Style>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="Auto" Header="Student Name"/>
+                                    <GridViewColumn Width="Auto" Header="Serial Number"/>
+                                    <GridViewColumn Width="Auto" Header="Number of Encounters"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</Window>
