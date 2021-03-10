@@ -17,8 +17,17 @@ namespace SafeSpaceCapstone.Model
         private string studentDataFilePath;
         #endregion
 
+        #region INotifyProperyChange
         public event PropertyChangedEventHandler PropertyChanged;
-    #region Get/Set
+        private void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+        #region Get/Set
         public string StudentName
         {
             get { return studentName; }
