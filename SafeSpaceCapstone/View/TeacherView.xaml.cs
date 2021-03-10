@@ -25,8 +25,8 @@ namespace SafeSpaceCapstone.View
             InitializeComponent();
         }
         #region Variables
-        string studentNamesFilePath;
-        string studentDataFilePath;
+        public string studentNamesFilePath;
+        public string studentDataFilePath;
         #endregion
 
         #region Event Handlers
@@ -43,6 +43,8 @@ namespace SafeSpaceCapstone.View
             {
                 studentNamesFilePath = openFileDialog.FileName;
             }
+            Mouse.OverrideCursor = null;
+
         }
 
         private void StudentDataMenuItem_Click(object sender, RoutedEventArgs e)
@@ -58,6 +60,7 @@ namespace SafeSpaceCapstone.View
             {
                 studentDataFilePath = openFileDialog.FileName;
             }
+            Mouse.OverrideCursor = null;
         }
         #endregion
     }

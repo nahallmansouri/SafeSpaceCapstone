@@ -19,36 +19,10 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical">
-                    <Expander x:Name="StudentNamesTable" Header="Student Names and Serial #'s">
-                        <ListView x:Name="StudentNamesListView"
-                                  Background="Transparent"
-                                  TextElement.FontSize="10">
-                            <ListView.Style>
-                                <Style TargetType="ListView"/>
-                            </ListView.Style>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="Auto" Header="Student Name"/>
-                                    <GridViewColumn Width="Auto" Header="Serial Number"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Expander>
-                    <Expander x:Name="StudentDataTable" Header="Student Names and Encounters">
-                        <ListView x:Name="StudentDataListView"
-                                  Background="Transparent"
-                                  TextElement.FontSize="10">
-                            <ListView.Style>
-                                <Style TargetType="ListView"/>
-                            </ListView.Style>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="Auto" Header="Serial Number"/>
-                                    <GridViewColumn Width="Auto" Header="Number of Encounters"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Expander>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="StudentNameFilePath"/>
+                        <TextBlock x:Name="StudentDataFilePath"/>
+                    </StackPanel>
                     <Expander x:Name="MasterTable" Header="Master Table">
                         <ListView x:Name="MasterListView"
                                   Background="Transparent"
