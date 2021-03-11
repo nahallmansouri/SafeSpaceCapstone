@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
+using SafeSpaceCapstone.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +22,26 @@ namespace SafeSpaceCapstone.View
     /// </summary>
     public partial class TeacherView : Window
     {
+        #region Fields
+        StudentInfoViewModel viewModel;
+        private CollectionView masterListView;
+        #endregion
+
+        #region Constructors
         public TeacherView()
         {
             InitializeComponent();
+            ConfigureViewModel();
         }
-        #region Variables
-        public string studentNamesFilePath;
-        public string studentDataFilePath;
         #endregion
 
+        #region Methods
+        private void ConfigureViewModel()
+        {
+            viewModel = new StudentInfoViewModel();
+            DataContext = viewModel;
+        }
+        #endregion
         #region Event Handlers
         private void StudentNamesMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -41,7 +54,7 @@ namespace SafeSpaceCapstone.View
             Mouse.OverrideCursor = Cursors.Wait;
             if (openFileDialog.ShowDialog() == true)
             {
-                studentNamesFilePath = openFileDialog.FileName;
+                viewModel.StudentNamesFilePath = openFileDialog.FileName;
             }
             Mouse.OverrideCursor = null;
 
@@ -58,7 +71,7 @@ namespace SafeSpaceCapstone.View
             Mouse.OverrideCursor = Cursors.Wait;
             if (openFileDialog.ShowDialog() == true)
             {
-                studentDataFilePath = openFileDialog.FileName;
+                viewModel.StudentDataFilePath = openFileDialog.FileName;
             }
             Mouse.OverrideCursor = null;
         }

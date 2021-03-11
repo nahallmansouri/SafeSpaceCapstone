@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SafeSpaceCapstone.View"
+        xmlns:vm="clr-namespace:SafeSpaceCapstone.ViewModel"
         mc:Ignorable="d"
         Title="TeacherView" Height="450" Width="800">
+    <Window.Resources>
+        <vm:StudentInfoViewModel x:Key="viewModel"/>
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -20,8 +24,33 @@
                           HorizontalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="StudentNameFilePath"/>
-                        <TextBlock x:Name="StudentDataFilePath"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Student Names File Path:"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                            <TextBlock x:Name="StudentNameFilePath" 
+                                       Grid.Column="1"
+                                       Grid.Row="0"
+                                       VerticalAlignment="Center"
+                                       Text= "{Binding Path= StudentNamesFilePath}"/>
+                            <Label Content="Student Data File Path:"
+                                   Grid.Column="0"
+                                   Grid.Row="1"/>
+                            <TextBlock x:Name="StudentDataFilePath" 
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       Text= "{Binding Path= StudentDataFilePath}"/>
+
+                        </Grid>
                     </StackPanel>
                     <Expander x:Name="MasterTable" Header="Master Table">
                         <ListView x:Name="MasterListView"
