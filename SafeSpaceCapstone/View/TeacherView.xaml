@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SafeSpaceCapstone.View"
         xmlns:vm="clr-namespace:SafeSpaceCapstone.ViewModel"
+        xmlns:util ="clr-namespace:SafeSpaceCapstone.Util"
         mc:Ignorable="d"
         Title="TeacherView" Height="450" Width="800">
     <Window.Resources>
@@ -52,18 +52,31 @@
 
                         </Grid>
                     </StackPanel>
-                    <Expander x:Name="MasterTable" Header="Master Table">
+                    <Expander x:Name="MasterTable" 
+                              Header="Master Table">
                         <ListView x:Name="MasterListView"
                                   Background="Transparent"
-                                  TextElement.FontSize="10">
+                                  TextElement.FontSize="10"
+                                  ItemsSource="{Binding Students, NotifyOnTargetUpdated=True}"
+                                  IsSynchronizedWithCurrentItem = "True"
+                                  util:GridViewSort.AutoSort="True">
                             <ListView.Style>
                                 <Style TargetType="ListView"/>
                             </ListView.Style>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="Auto" Header="Student Name"/>
-                                    <GridViewColumn Width="Auto" Header="Serial Number"/>
-                                    <GridViewColumn Width="Auto" Header="Number of Encounters"/>
+                                    <GridViewColumn Width="Auto" 
+                                                    DisplayMemberBinding="{Binding StudentName, NotifyOnTargetUpdated=True}"
+                                                    Header="Student Name"
+                                                    util:GridViewSort.PropertyName="StudentName"/>
+                                    <GridViewColumn Width="Auto" 
+                                                    DisplayMemberBinding="{Binding StudentSerialNum, NotifyOnTargetUpdated=True}"
+                                                    Header="Serial Number"
+                                                    util:GridViewSort.PropertyName="StudentSerialNum"/>
+                                    <GridViewColumn Width="Auto" 
+                                                    DisplayMemberBinding="{Binding StudentNumEncounters, NotifyOnTargetUpdated=True}"
+                                                    Header="Number of Encounters"
+                                                    util:GridViewSort.PropertyName="StudentNumEncounters"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>

@@ -13,8 +13,19 @@ namespace SafeSpaceCapstone.Model
         private string studentName;
         private string studentSerialNum;
         private string studentNumEncounters;
-        //private string studentNamesFilePath;
-        //private string studentDataFilePath;
+        #endregion
+
+        #region Constructor
+        //Constructor used when parsing the Student Name CSV
+        //There is no NumEncounters in this CSV there for we fill with an empty string
+        public StudentInfoModel(string rowData)
+        {
+            //splits the row of data from the CSV into seperate fields stored in an array
+            string[] data = rowData.Split(',');
+            StudentName = data[0];
+            StudentSerialNum = data[1];
+            StudentNumEncounters = "";
+        }
         #endregion
 
         #region INotifyProperyChange
@@ -24,6 +35,7 @@ namespace SafeSpaceCapstone.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+        
         #region Get/Set
         public string StudentName
         {

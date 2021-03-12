@@ -1,19 +1,7 @@
 ﻿using Microsoft.Win32;
 using SafeSpaceCapstone.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SafeSpaceCapstone.View
 {
@@ -24,7 +12,7 @@ namespace SafeSpaceCapstone.View
     {
         #region Fields
         StudentInfoViewModel viewModel;
-        private CollectionView masterListView;
+        //private CollectionView masterListView;
         #endregion
 
         #region Constructors
@@ -54,7 +42,10 @@ namespace SafeSpaceCapstone.View
             Mouse.OverrideCursor = Cursors.Wait;
             if (openFileDialog.ShowDialog() == true)
             {
+                //sets the Students Name File Path in viewmodel
                 viewModel.StudentNamesFilePath = openFileDialog.FileName;
+                //parses that file
+                viewModel.ParseStudentNameCSV(openFileDialog.FileName);
             }
             Mouse.OverrideCursor = null;
 
@@ -72,6 +63,8 @@ namespace SafeSpaceCapstone.View
             if (openFileDialog.ShowDialog() == true)
             {
                 viewModel.StudentDataFilePath = openFileDialog.FileName;
+                //parses that file
+                viewModel.ParseStudentDataCSV(openFileDialog.FileName);
             }
             Mouse.OverrideCursor = null;
         }
