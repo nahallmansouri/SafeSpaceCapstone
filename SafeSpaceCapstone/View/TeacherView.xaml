@@ -18,7 +18,7 @@
                     <MenuItem Name="StudentNamesMenuItem" Header="Student Names" Click="StudentNamesMenuItem_Click" />
                     <MenuItem Name ="StudentDataMenuItem" Header="Student Data" Click="StudentDataMenuItem_Click"/>
                 </MenuItem>
-                <MenuItem Name="ExportMenuItem" Header="Export"/>
+                <MenuItem Name="ExportMenuItem" Header="Export" Click="ExportMenuItem_Click"/>
             </Menu>
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto">

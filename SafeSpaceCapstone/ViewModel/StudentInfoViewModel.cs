@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -74,10 +75,33 @@ namespace SafeSpaceCapstone.ViewModel
             }
         }
 
-        public void ParseStudentDataCSV(string filepath)
+        public void ParseStudentDataCSV()
         {
+            //gets the directory for the user
+            string userPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                userPath = Directory.GetParent(userPath).ToString();
+            }
+            //Change directory to the User's Path
+            string cdCmd = "cd " + userPath;
+            //Pull file and places it into our directory (User Folder)
+            string pullFileCmd = "ufs get \"test.txt\" ";
+            //Sets up process to use comand prompt
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.UseShellExecute = false;
+            //Starts Command Prompt
+            process.Start();
+            //Calls comands from above to pull the file
+            process.StandardInput.WriteLine(cdCmd);
+            process.StandardInput.WriteLine(pullFileCmd);
             //Reads the contents of the CSV files as individual lines
-            string[] lines = System.IO.File.ReadAllLines(filepath);
+            string fullFilePath = userPath + "\\test.txt";
+            StudentDataFilePath = fullFilePath;
+            string[] lines = System.IO.File.ReadAllLines(fullFilePath);
             //Split each row into column data
             bool isFirst = true;
             foreach (var line in lines)
@@ -97,6 +121,29 @@ namespace SafeSpaceCapstone.ViewModel
                         break; //if we found a match we want to move to next line
                     }
                }
+            }
+        }
+        
+        public void ExportMasterTable(string folderPath)
+        {
+            //DateTime dateTime = DateTime.UtcNow.Date;
+            string dateOfExport = DateTime.Now.ToShortDateString();
+            //must replae the '/' becuase it throws errors when producing file paths
+            dateOfExport = dateOfExport.Replace('/', '-');
+            //create file name. have to add .csv to specify file type
+            string fileName = "Student Encounters " + dateOfExport + ".csv";
+            string delimeter = ",";
+            using (StreamWriter file = new StreamWriter(Path.Combine(folderPath, fileName)))
+            {
+                //sets the header for the CSV
+                file.Write("Student Names, Student Serial Numbers, Student Number of Encounters");
+                file.WriteLine();
+                foreach (StudentInfoModel student in Students)
+                {
+                    //writes the date for one student to the file
+                    file.Write(student.StudentName + delimeter + student.StudentSerialNum + delimeter + student.StudentNumEncounters);
+                    file.WriteLine();
+                }
             }
         }
         #endregion
