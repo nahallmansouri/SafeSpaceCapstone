@@ -86,7 +86,7 @@ namespace SafeSpaceCapstone.ViewModel
             //Change directory to the User's Path
             string cdCmd = "cd " + userPath;
             //Pull file and places it into our directory (User Folder)
-            string pullFileCmd = "ufs get \"test.txt\" ";
+            string pullFileCmd = "ufs get \"test.csv\" ";
             //Sets up process to use comand prompt
             Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
@@ -99,7 +99,7 @@ namespace SafeSpaceCapstone.ViewModel
             process.StandardInput.WriteLine(cdCmd);
             process.StandardInput.WriteLine(pullFileCmd);
             //Reads the contents of the CSV files as individual lines
-            string fullFilePath = userPath + "\\test.txt";
+            string fullFilePath = userPath + "\\test.csv";
             StudentDataFilePath = fullFilePath;
             string[] lines = System.IO.File.ReadAllLines(fullFilePath);
             //Split each row into column data
